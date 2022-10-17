@@ -234,7 +234,9 @@ public class AlgLab
     {
         try
         {
-            if (Manager.Open(filePath: Path.Combine(Environment.CurrentDirectory, "Test.xlsx")))
+            string path = "D:\\Proggraming\\C# code\\KI_Practice\\Tests_xlsx\\Algorithms.xlsx";
+
+            if (Manager.Open(path))
             {
                 //----------------------------------------------------
                 Manager.SetRange(el1: "C2", el2: "L2", _ffNum);
