@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "PcfXGv8mqg7mLjjdpMqLSUSx7IAJrPbppVgevQbyi6qOgYuuRtmUBQYX//l4Uf+x10eg9Y1XvXlkXQJPx0nLqA==",
+  "success": true,
+  "projectFilePath": "D:\\Proggraming\\C# code\\KI_Practice\\KI_Practice\\KI_Practice.csproj",
+  "expectedPackageFiles": [
+    "D:\\Users\\retretor\\.nuget\\packages\\excel.2016\\15.1.0\\excel.2016.15.1.0.nupkg.sha512",
+    "D:\\Users\\retretor\\.nuget\\packages\\microsoft.office.interop.excel\\15.0.4795.1001\\microsoft.office.interop.excel.15.0.4795.1001.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Excel.2016 15.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Excel.2016",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}

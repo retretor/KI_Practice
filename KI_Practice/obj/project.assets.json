@@ -1,0 +1,145 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "Excel.2016/15.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/Microsoft.Office.Interop.Excel.dll": {},
+          "lib/OFFICE.DLL": {}
+        },
+        "runtime": {
+          "lib/Microsoft.Office.Interop.Excel.dll": {},
+          "lib/OFFICE.DLL": {}
+        }
+      },
+      "Microsoft.Office.Interop.Excel/15.0.4795.1001": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Office.Interop.Excel.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Office.Interop.Excel.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Excel.2016/15.1.0": {
+      "sha512": "W8Muf5x98nDCU+tu5un458F7ex/5g5VEHMMyuv17eBEWH/XwW8LpFHg+4LmY0TGwYbKZpzMeUv7slFnp+vUI8A==",
+      "type": "package",
+      "path": "excel.2016/15.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "excel.2016.15.1.0.nupkg.sha512",
+        "excel.2016.nuspec",
+        "lib/Microsoft.Office.Interop.Excel.dll",
+        "lib/OFFICE.DLL"
+      ]
+    },
+    "Microsoft.Office.Interop.Excel/15.0.4795.1001": {
+      "sha512": "cuvqi/U5MYSM0gvR2l90q0m/urRgmg69EiwP5VWp1RcaJ0YT5G26Va5LaOZ3KJFc22FNihS5CUjeePUp2YpGQA==",
+      "type": "package",
+      "path": "microsoft.office.interop.excel/15.0.4795.1001",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20/Microsoft.Office.Interop.Excel.dll",
+        "lib/netstandard2.0/Microsoft.Office.Interop.Excel.dll",
+        "microsoft.office.interop.excel.15.0.4795.1001.nupkg.sha512",
+        "microsoft.office.interop.excel.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "Excel.2016 >= 15.1.0",
+      "Microsoft.Office.Interop.Excel >= 15.0.4795.1001"
+    ]
+  },
+  "packageFolders": {
+    "D:\\Users\\retretor\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\Proggraming\\C# code\\KI_Practice\\KI_Practice\\KI_Practice.csproj",
+      "projectName": "KI_Practice",
+      "projectPath": "D:\\Proggraming\\C# code\\KI_Practice\\KI_Practice\\KI_Practice.csproj",
+      "packagesPath": "D:\\Users\\retretor\\.nuget\\packages\\",
+      "outputPath": "D:\\Proggraming\\C# code\\KI_Practice\\KI_Practice\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "D:\\Users\\retretor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "dependencies": {
+          "Excel.2016": {
+            "target": "Package",
+            "version": "[15.1.0, )"
+          },
+          "Microsoft.Office.Interop.Excel": {
+            "target": "Package",
+            "version": "[15.0.4795.1001, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Excel.2016 15.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Excel.2016",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}
