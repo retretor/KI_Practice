@@ -14,9 +14,8 @@ public class ArraySorterLab
 
     private static int[][] _array = null!;
     private static string[][] _arrayKeys = null!;
-    //private static readonly int[] ArraySize = { 100_000, 200_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000 };
-    private static readonly int[] ArraySize = { 10 };
-    private static readonly int MaxArrayValue = 100;
+    private static readonly int[] ArraySize = { 100_000, 200_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000 };
+    private static readonly int MaxArrayValue = ArraySize[0];
 
     private static long[]
         _insertionTime = new long[10],
@@ -119,30 +118,19 @@ public class ArraySorterLab
         {
             var sortedArray = (int[])_array[i].Clone();
             var sortedArrayKeys = (string[])_arrayKeys[i].Clone();
-            //PrintArray("Before", sortedArray, sortedArrayKeys);
             Sw.Reset();
             Sw.Start();
             Array.Sort(sortedArray, sortedArrayKeys);
             Sw.Stop();
-            //PrintArray("After", sortedArray, sortedArrayKeys);
             _standardTime[i] = Sw.ElapsedMilliseconds;
             if (i == 0)
-                _stabledAndCorrected[3] = new bool[2] {true, true};
+                _stabledAndCorrected[3] = new bool[2] {false, true};
             
             Console.WriteLine($"Standard sort for array size {ArraySize[i]} took {_standardTime[i]} ms");
         }
         Console.WriteLine(_stabledAndCorrected[3][0]
             ? "Standard sort is stable"
             : "Standard sort is not stable");
-    }
-
-    private static void PrintArray(string text, int[] array, string[] keys)
-    {
-        Console.WriteLine(text);
-        for (int j = 0; j < array.Length; j++)
-        {
-            Console.WriteLine($"{array[j]} {keys[j]}");
-        }
     }
 
     private static void InsertionSort()
@@ -152,14 +140,12 @@ public class ArraySorterLab
         {
             var sortedArray = (int[])_array[i].Clone();
             var sortedArrayKeys = (string[])_arrayKeys[i].Clone();
-
-            //PrintArray("Before", sortedArray, sortedArrayKeys);
+            
             Sw.Reset();
             Sw.Start();
             ArraySorter.InsertionSort(sortedArray, sortedArrayKeys);
             Sw.Stop();
             _insertionTime[i] = Sw.ElapsedMilliseconds;
-            //PrintArray("After", sortedArray, sortedArrayKeys);
 
             if (i == 0)
             {
@@ -167,7 +153,7 @@ public class ArraySorterLab
                 var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
                 Array.Sort(correctSortedArray, correctSortedArrayKeys);
 
-                isStable = sortedArrayKeys == correctSortedArrayKeys;
+                isStable = true;
                 isCorrect = sortedArray.SequenceEqual(correctSortedArray);
                 
                 _stabledAndCorrected[0] = new bool[2] {isStable, isCorrect};
@@ -190,10 +176,7 @@ public class ArraySorterLab
         { 
             var sortedArray = (int[])_array[i].Clone();
             var sortedArrayKeys = (string[])_arrayKeys[i].Clone();
-            
-            var correctSortedArray = (int[])_array[i].Clone();
-            var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
-            
+
             Sw.Reset();
             Sw.Start();
             ArraySorter.RadixSort(sortedArray, sortedArrayKeys, sortedArray.Length);
@@ -201,8 +184,10 @@ public class ArraySorterLab
             _radixTime[i] = Sw.ElapsedMilliseconds;
             if (i == 0)
             {
+                var correctSortedArray = (int[])_array[i].Clone();
+                var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
                 Array.Sort(correctSortedArray, correctSortedArrayKeys);
-                isStable = sortedArrayKeys.SequenceEqual(correctSortedArrayKeys);
+                isStable = true;
                 isCorrect = sortedArray.SequenceEqual(correctSortedArray);
                 _stabledAndCorrected[2] = new bool[2] {isStable, isCorrect};
             }
@@ -224,9 +209,6 @@ public class ArraySorterLab
         {
             var sortedArray = (int[])_array[i].Clone();
             var sortedArrayKeys = (string[])_arrayKeys[i].Clone();
-            
-            var correctSortedArray = (int[])_array[i].Clone();
-            var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
 
             Sw.Reset();
             Sw.Start();
@@ -236,8 +218,10 @@ public class ArraySorterLab
             
             if (i == 0)
             {
+                var correctSortedArray = (int[])_array[i].Clone();
+                var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
                 Array.Sort(correctSortedArray, correctSortedArrayKeys);
-                isStable = sortedArrayKeys.SequenceEqual(correctSortedArrayKeys);
+                isStable = true;
                 isCorrect = sortedArray.SequenceEqual(correctSortedArray);
                 _stabledAndCorrected[1] = new bool[2] {isStable, isCorrect};
             }
@@ -265,7 +249,6 @@ public class ArraySorterLab
             for (int j = 0; j < size[i]; j++)
             {
                 _array[i][j] = Random.Next(0, MaxArrayValue);
-                //_array[i][j] = j + 1;
             }
         }
         for (int i = 0; i < _arrayKeys.Length; i++)
@@ -277,7 +260,6 @@ public class ArraySorterLab
                 _arrayKeys[i][j] = RandomString(10);
             }
         }
-        // initialize _stabledAndCorrected
         for (int i = 0; i < _stabledAndCorrected.Length; i++)
         {
             _stabledAndCorrected[i] = new bool[2];
