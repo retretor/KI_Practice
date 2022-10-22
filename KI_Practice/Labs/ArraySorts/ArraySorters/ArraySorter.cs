@@ -1,21 +1,11 @@
-﻿using System.Diagnostics;
-
-namespace KI_Practice;
+﻿namespace KI_Practice.Labs.ArraySorts.ArraySorters;
 
 public class ArraySorter
 {
     private static int[] _array = new int[1];
+    public int[] GetArray() => _array;
+    public void SetArray(int[] array) => _array = array;
 
-    public int[] GetArray()
-    {
-        return _array;
-    }
-    public void SetArray(int[] array)
-    {
-        _array = array;
-    }
-
-    #region Insertion sort
     public void InsertionSort(int[] array, string[] keys)
     {
         for (int i = 1; i < array.Length; i++)
@@ -33,9 +23,7 @@ public class ArraySorter
             keys[j] = tempKey;
         }
     }
-    #endregion
 
-    #region Merge sort
     private static void Merge(int[] arr, int l, int m, int r, string[] keys)
     {
         int n1 = m - l + 1;
@@ -92,19 +80,18 @@ public class ArraySorter
         }
     }
     
-    public void MergeSort(int[] arr, int l, int r, string[] keys)
+    public void MergeSort(int[] arr, string[] keys, int l, int r)
     {
         if (l < r) {
             int m = l + (r - l) / 2;
-            MergeSort(arr, l, m, keys);
-            MergeSort(arr, m + 1, r, keys);
+            MergeSort(arr, keys, l, m);
+            MergeSort(arr, keys, m + 1, r);
             Merge(arr, l, m, r, keys);
         }
     }
-    #endregion
 
-    #region Radix sort
-    public void RadixSort(int[] arr, int n, string[] keys)
+
+    public void RadixSort(int[] arr, string[] keys, int n)
     {
         int m = GetMax(arr, n);
 
@@ -150,10 +137,7 @@ public class ArraySorter
                 mx = arr[i];
         return mx;
     }
-    #endregion
-    
-    #region Is stable
-    
+
     public bool IsStable(int[] startArray, string[] startKeys, int[] endArray, string[] endKeys)
     {
         // find elements of startArray in endArray and compare their keys
@@ -172,6 +156,5 @@ public class ArraySorter
         }
         return true;
     }
-
-    #endregion
+    
 }

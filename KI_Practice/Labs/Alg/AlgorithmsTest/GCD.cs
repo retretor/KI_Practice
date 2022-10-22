@@ -1,4 +1,4 @@
-﻿namespace KI_Practice;
+﻿namespace KI_Practice.Labs.Alg.AlgorithmsTest;
 
 public class GCD
 {

@@ -115,6 +115,16 @@ public class ExcelManager : IDisposable
         
         return SetRange(el1, el2, temp);
     }
+    
+    public bool SetRange(string el1, string el2, bool[] data)
+    {
+        object[] temp = new object[data.Length];
+        
+        for (int i = 0; i < temp.Length; i++) temp[i] = data[i];
+        
+        return SetRange(el1, el2, temp);
+    }
+    
     public bool SetRange(string el1, string el2, int[] data)
     {
         try

@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
+using KI_Practice.Labs.ArraySorts.ArraySorters;
 using KI_Practice.Managers;
 
-namespace KI_Practice.Labs;
+namespace KI_Practice.Labs.ArraySorts;
 
 public class ArraySorterLab
 {
@@ -13,7 +14,9 @@ public class ArraySorterLab
 
     private static int[][] _array = null!;
     private static string[][] _arrayKeys = null!;
-    private static readonly int[] ArraySize = { 100_000, 200_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000 };
+    //private static readonly int[] ArraySize = { 100_000, 200_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000 };
+    private static readonly int[] ArraySize = { 10 };
+    private static readonly int MaxArrayValue = 100;
 
     private static long[]
         _insertionTime = new long[10],
@@ -26,12 +29,12 @@ public class ArraySorterLab
     {
         // Main program
         bool isActive = true;
-        Console.WriteLine("Loading...");
+        Console.WriteLine("Creating arrays...");
         CreateArray(ArraySize);
         
         while (isActive)
         {
-            int action = EnterAction();
+            int action = MenuAction();
 
             switch (action)
             {
@@ -67,64 +70,39 @@ public class ArraySorterLab
             }
         }
     }
+    private static int MenuAction()
+    {
+        Console.WriteLine("Enter an action:\n" +
+                          "0. Leave\n" +
+                          "1. Insertion sort\n" +
+                          "2. Merge sort\n" +
+                          "3. Radix sort\n" +
+                          "4. Standard sort\n" +
+                          "5. Do all tests\n" +
+                          "6. Write tests to Excel");
+        
+        int a = Convert.ToInt32(Console.ReadLine());
+        return a;
+    }
 
     private static void WriteTestToExcel()
     {
         try
         {
-            if (Manager.Open(filePath: Path.Combine(Environment.CurrentDirectory, "Array.xlsx")))
+            string path = "D:\\Proggraming\\C# code\\KI_Practice\\Tests_xlsx\\ArraySorters.xlsx";
+            if (Manager.Open(path))
             {
-                object[] temp = new object[_standardTime.Length];
-                    
                 //----------------------------------------------------
                 Manager.SetRange(el1: "C2", el2: "L2", ArraySize);
-                    
-                for (int i = 0; i < temp.Length; i++)
-                { 
-                    temp[i] = _insertionTime[i];
-                } 
-                Manager.SetRange(el1: "C3", el2: "L3", temp);
-                    
-                for (int i = 0; i < temp.Length; i++)
-                {
-                    temp[i] = _mergeTime[i];
-                }
-                Manager.SetRange(el1: "C4", el2: "L4", temp);
-
-                for (int i = 0; i < temp.Length; i++)
-                { 
-                    temp[i] = _radixTime[i];
-                }
-                Manager.SetRange(el1: "C5", el2: "L5", temp);
-                    
-                for (int i = 0; i < temp.Length; i++)
-                {
-                    temp[i] = _standardTime[i];
-                }
-                Manager.SetRange(el1: "C6", el2: "L6", temp);
+                Manager.SetRange(el1: "C3", el2: "L3", _insertionTime);
+                Manager.SetRange(el1: "C4", el2: "L4", _mergeTime);
+                Manager.SetRange(el1: "C5", el2: "L5", _radixTime);
+                Manager.SetRange(el1: "C6", el2: "L6", _standardTime);
                 //----------------------------------------------------
-                temp = new object[_stabledAndCorrected[0].Length];
-                for (int i = 0; i < temp.Length; i++)
-                {
-                    temp[i] = _stabledAndCorrected[0][i];
-                }
-                Manager.SetRange(el1: "M3", el2: "N3", temp);
-                for (int i = 0; i < temp.Length; i++)
-                {
-                    temp[i] = _stabledAndCorrected[1][i];
-                }
-                Manager.SetRange(el1: "M4", el2: "N4", temp);
-                for (int i = 0; i < temp.Length; i++)
-                {
-                    temp[i] = _stabledAndCorrected[2][i];
-                }
-                Manager.SetRange(el1: "M5", el2: "N5", temp);
-                for (int i = 0; i < temp.Length; i++)
-                {
-                    temp[i] = _stabledAndCorrected[3][i];
-                }
-                Manager.SetRange(el1: "M6", el2: "N6", temp);
-
+                Manager.SetRange(el1: "M3", el2: "N3", _stabledAndCorrected[0]);
+                Manager.SetRange(el1: "M4", el2: "N4", _stabledAndCorrected[1]);
+                Manager.SetRange(el1: "M5", el2: "N5", _stabledAndCorrected[2]);
+                Manager.SetRange(el1: "M6", el2: "N6", _stabledAndCorrected[3]);
 
                 Manager.Save();
                 Manager.Dispose();
@@ -137,27 +115,34 @@ public class ArraySorterLab
     }
     private static void StandardSort()
     {
-        bool isStable = false;
         for (int i = 0; i < _array.Length; i++)
         {
             var sortedArray = (int[])_array[i].Clone();
             var sortedArrayKeys = (string[])_arrayKeys[i].Clone();
-            
+            //PrintArray("Before", sortedArray, sortedArrayKeys);
             Sw.Reset();
             Sw.Start();
             Array.Sort(sortedArray, sortedArrayKeys);
             Sw.Stop();
+            //PrintArray("After", sortedArray, sortedArrayKeys);
             _standardTime[i] = Sw.ElapsedMilliseconds;
             if (i == 0)
-            {
-                isStable = ArraySorter.IsStable(_array[i], _arrayKeys[i], sortedArray, sortedArrayKeys);
-                _stabledAndCorrected[3] = new bool[2] {isStable, true};
-            }
+                _stabledAndCorrected[3] = new bool[2] {true, true};
+            
             Console.WriteLine($"Standard sort for array size {ArraySize[i]} took {_standardTime[i]} ms");
         }
-        Console.WriteLine(isStable
+        Console.WriteLine(_stabledAndCorrected[3][0]
             ? "Standard sort is stable"
             : "Standard sort is not stable");
+    }
+
+    private static void PrintArray(string text, int[] array, string[] keys)
+    {
+        Console.WriteLine(text);
+        for (int j = 0; j < array.Length; j++)
+        {
+            Console.WriteLine($"{array[j]} {keys[j]}");
+        }
     }
 
     private static void InsertionSort()
@@ -166,19 +151,23 @@ public class ArraySorterLab
         for (int i = 0; i < _array.Length; i++)
         {
             var sortedArray = (int[])_array[i].Clone();
-            var correctSortedArray = (int[])_array[i].Clone();
             var sortedArrayKeys = (string[])_arrayKeys[i].Clone();
 
+            //PrintArray("Before", sortedArray, sortedArrayKeys);
             Sw.Reset();
             Sw.Start();
             ArraySorter.InsertionSort(sortedArray, sortedArrayKeys);
             Sw.Stop();
             _insertionTime[i] = Sw.ElapsedMilliseconds;
-            Array.Sort(correctSortedArray);
-            
+            //PrintArray("After", sortedArray, sortedArrayKeys);
+
             if (i == 0)
             {
-                isStable = ArraySorter.IsStable(_array[i], _arrayKeys[i], sortedArray, sortedArrayKeys);
+                var correctSortedArray = (int[])_array[i].Clone();
+                var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
+                Array.Sort(correctSortedArray, correctSortedArrayKeys);
+
+                isStable = sortedArrayKeys == correctSortedArrayKeys;
                 isCorrect = sortedArray.SequenceEqual(correctSortedArray);
                 
                 _stabledAndCorrected[0] = new bool[2] {isStable, isCorrect};
@@ -200,18 +189,20 @@ public class ArraySorterLab
         for (int i = 0; i < _array.Length; i++)
         { 
             var sortedArray = (int[])_array[i].Clone();
-            var correctSortedArray = (int[])_array[i].Clone();
             var sortedArrayKeys = (string[])_arrayKeys[i].Clone();
+            
+            var correctSortedArray = (int[])_array[i].Clone();
+            var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
             
             Sw.Reset();
             Sw.Start();
-            ArraySorter.RadixSort(sortedArray, sortedArray.Length, sortedArrayKeys);
+            ArraySorter.RadixSort(sortedArray, sortedArrayKeys, sortedArray.Length);
             Sw.Stop();
             _radixTime[i] = Sw.ElapsedMilliseconds;
-            Array.Sort(correctSortedArray);
             if (i == 0)
             {
-                isStable = ArraySorter.IsStable(_array[i], _arrayKeys[i], sortedArray, sortedArrayKeys);
+                Array.Sort(correctSortedArray, correctSortedArrayKeys);
+                isStable = sortedArrayKeys.SequenceEqual(correctSortedArrayKeys);
                 isCorrect = sortedArray.SequenceEqual(correctSortedArray);
                 _stabledAndCorrected[2] = new bool[2] {isStable, isCorrect};
             }
@@ -232,18 +223,21 @@ public class ArraySorterLab
         for (int i = 0; i < _array.Length; i++)
         {
             var sortedArray = (int[])_array[i].Clone();
-            var correctSortedArray = (int[])_array[i].Clone();
             var sortedArrayKeys = (string[])_arrayKeys[i].Clone();
+            
+            var correctSortedArray = (int[])_array[i].Clone();
+            var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
 
             Sw.Reset();
             Sw.Start();
-            ArraySorter.MergeSort(sortedArray, 0, sortedArray.Length - 1, sortedArrayKeys);
+            ArraySorter.MergeSort(sortedArray, sortedArrayKeys, 0, sortedArray.Length - 1);
             Sw.Stop();
             _mergeTime[i] = Sw.ElapsedMilliseconds;
-            Array.Sort(correctSortedArray);
+            
             if (i == 0)
             {
-                isStable = ArraySorter.IsStable(_array[i], _arrayKeys[i], sortedArray, sortedArrayKeys);
+                Array.Sort(correctSortedArray, correctSortedArrayKeys);
+                isStable = sortedArrayKeys.SequenceEqual(correctSortedArrayKeys);
                 isCorrect = sortedArray.SequenceEqual(correctSortedArray);
                 _stabledAndCorrected[1] = new bool[2] {isStable, isCorrect};
             }
@@ -270,7 +264,8 @@ public class ArraySorterLab
             _array[i] = new int[size[i]];
             for (int j = 0; j < size[i]; j++)
             {
-                _array[i][j] = j + 1;
+                _array[i][j] = Random.Next(0, MaxArrayValue);
+                //_array[i][j] = j + 1;
             }
         }
         for (int i = 0; i < _arrayKeys.Length; i++)
@@ -290,10 +285,7 @@ public class ArraySorterLab
             _stabledAndCorrected[i][1] = false;
         }
 
-        for (int i = 0; i < _array.Length; i++)
-        {
-            Shuffle(_array[i], _arrayKeys[i]);
-        }
+        for (int i = 0; i < _array.Length; i++) Shuffle(_array[i], _arrayKeys[i]);
     }
 
     private static string RandomString(int i)
@@ -313,23 +305,5 @@ public class ArraySorterLab
         }
     }
 
-    #endregion
-
-    #region Menu
-
-    private static int EnterAction()
-    {
-        Console.WriteLine("Enter an action:\n" +
-                          "0. Leave\n" +
-                          "1. Insertion sort\n" +
-                          "2. Merge sort\n" +
-                          "3. Radix sort\n" +
-                          "4. Standard sort\n" +
-                          "5. Do all tests\n" +
-                          "6. Write tests to Excel");
-        
-        int a = Convert.ToInt32(Console.ReadLine());
-        return a;
-    }
     #endregion
 }

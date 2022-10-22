@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
+using KI_Practice.Labs.Alg.AlgorithmsTest;
 using KI_Practice.Managers;
 
-namespace KI_Practice.Labs;
+namespace KI_Practice.Labs.Alg;
 public class AlgLab
 {
     //Fields
@@ -114,7 +115,7 @@ public class AlgLab
             Fibonacci.CalculateUsingThreeField(47), Fibonacci.CalculateUsingThreeField(48),
             Fibonacci.CalculateUsingThreeField(49), Fibonacci.CalculateUsingThreeField(50) };
         _gcdNum = arr;
-            
+        
         GcdDelegate gcdDelegate = GCD.Division;
         TestGcd(gcdDelegate, DivGCD_op, DivGCD_time, arr, num2, "Division");
         gcdDelegate = GCD.Enumeration;
@@ -149,7 +150,6 @@ public class AlgLab
     private static void PrimeNumbersCompare()
     {
         long[] arr = { 100_000, 200_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000 };
-        //long[] arr = { 100_000_000 };
         _peNum = arr;
             
         PrimeDelegate primeDelegate = PrimeNumbers.CalculatePrimesSieve;
@@ -229,7 +229,7 @@ public class AlgLab
             data2 = data[i];
         }
     }
-        
+    
     private static void WriteTestToExcel()
     {
         try

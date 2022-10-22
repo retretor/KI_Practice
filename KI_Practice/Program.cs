@@ -1,9 +1,12 @@
 ﻿using KI_Practice.Labs;
+using KI_Practice.Labs.Alg;
+using KI_Practice.Labs.ArraySorts;
+using KI_Practice.Labs.DataTypes;
 using KI_Practice.Managers;
 
 namespace KI_Practice
 {
-    class Program
+    static class Program
     {
         private static void Main(string[] args)
         {
@@ -24,6 +27,9 @@ namespace KI_Practice
                     case 2:
                         ArraySorterLab.Run();
                         break;
+                    case 3:
+                        TypeDataLab.Run();
+                        break;
                     default:
                         break;
                 }
@@ -34,8 +40,10 @@ namespace KI_Practice
         {
             Console.WriteLine("Which test do you want to run?");
             Console.WriteLine("0 - Exit");
-            Console.WriteLine("1 - Algs");
+            Console.WriteLine("1 - Algorithms");
             Console.WriteLine("2 - Array sorts");
+            Console.WriteLine("3 - Data types");
+
             int a = Convert.ToInt32(Console.ReadLine());
             return a;
         }
