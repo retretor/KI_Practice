@@ -1,8 +1,8 @@
 ﻿namespace KI_Practice.Labs.DataTypes.DataTypes;
 
-/*public class OnewayList<T> : IOnewayList<T>
+public class OnewayList<T> : IOnewayList<T>
 {
-    /*private ListNode<T> head = null;
+    private ListNode<T> head = null;
     private ListNode<T> tail = null;
     
     public void Add(T Data)
@@ -22,61 +22,56 @@
         Count++;
     }
 
-
-    public void Remove(int value)
+    public T Get(int index)
     {
-        throw new NotImplementedException();
-    }
-
-    public int Get(int index)
-    {
-        throw new NotImplementedException();
-    }
-    public void Delete(T data)
+        if (index < 0 || index >= Count)
         {
-            var current = head;
-
-            Item<T> previous = null;
-            
-            while(current != null)
-            {
-                if(current.Data.Equals(data))
-                {
-                    if (previous != null)
-                    {
-                        // Устанавливаем у предыдущего элемента указатель на следующий элемент от текущего.
-                        previous.Next = current.Next;
-                        if(current.Next == null)
-                        {
-                            _tail = previous;
-                        }
-                    }
-                    else
-                    {
-                        // Устанавливаем головной элемент следующим.
-                        _head = _head.Next;
- 
-                        // Если список оказался пустым,
-                        // то обнуляем и крайний элемент.
-                        if(_head == null)
-                        {
-                            _tail = null;
-                        }
-                    }
- 
-                    // Элемент был удален.
-                    // Уменьшаем количество элементов и выходим из цикла.
-                    // Для того, чтобы удалить все вхождения данных из списка
-                    // необходимо не выходить из цикла, а продолжать до его завершения.
-                    _count--;
-                    break;
-                }
- 
-                // Переходим к следующему элементу списка.
-                previous = current;
-                current = current.Next;
-            }
+            Console.WriteLine("Index out of range");
+            return default(T);
         }
+        ListNode<T> node = head;
+        for (int i = 0; i < index; i++)
+        {
+            node = node.Next;
+        }
+        return node.Data;
+    }
+    
+    public void Remove(T data)
+    {
+        ListNode<T> current = head;
+
+        ListNode<T> previous = null;
+            
+        while(current != null)
+        {
+            if(current.Data.Equals(data))
+            {
+                if (previous != null)
+                {
+                    previous.Next = current.Next;
+                    if(current.Next == null)
+                    {
+                        tail = previous;
+                    }
+                }
+                else
+                {
+                    head = head.Next;
+
+                    if(head == null)
+                    {
+                        tail = null;
+                    }
+                }
+                Count--;
+                break;
+            }
+                
+            previous = current;
+            current = current.Next;
+        }
+    }
  
 
     public void Clear()
@@ -85,6 +80,16 @@
         tail = null;
         Count = 0;
     }
+    public void Print()
+    {
+        ListNode<T> node = head;
+        while (node != null)
+        {
+            Console.Write(node.Data + " ");
+            node = node.Next;
+        }
+        Console.WriteLine();
+    }
 
     public int Count { get; private set; }
-}*/
+}

@@ -3,9 +3,11 @@
 public class MyStack<T> : IStack<T>
 {
     private StackNode<T> _top;
+    public long Count { get; private set; }
 
     public MyStack()
     {
+        Count = 0;
         _top = null;
     }
     public void Push(T value)
@@ -18,6 +20,7 @@ public class MyStack<T> : IStack<T>
             newNode.Next = _top;
             _top = newNode;
         }
+        Count++;
     }
 
     public T Pop()
@@ -26,6 +29,7 @@ public class MyStack<T> : IStack<T>
         {
             StackNode<T> node = _top;
             _top = _top.Next;
+            Count--;
             return node.Data;
         }
         throw new InvalidOperationException("Stack is empty");

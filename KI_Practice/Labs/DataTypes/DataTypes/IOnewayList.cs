@@ -5,5 +5,4 @@ public interface IOnewayList<T>
     void Add(T data);
     void Remove(T value);
     void Clear();
-    int Count { get; }
 }
