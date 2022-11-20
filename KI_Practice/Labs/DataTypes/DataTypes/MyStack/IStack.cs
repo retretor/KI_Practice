@@ -6,5 +6,4 @@ public interface IStack<T>
     T Pop();
     bool CanPush();
     bool CanPop();
-
 }
