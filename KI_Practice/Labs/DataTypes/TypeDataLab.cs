@@ -1,10 +1,11 @@
-﻿namespace KI_Practice.Labs.DataTypes;
+﻿using KI_Practice.Labs.DataTypes.DataTypes;
+namespace KI_Practice.Labs.DataTypes;
 
 public class TypeDataLab
 {
-    private static Stack<long>? _stackLong = null;
-    private static Stack<double>? _stackDouble = null;
-    private static Stack<string>? _stackString = null;
+    private static MyStack<long> _stackLong;
+    private static MyStack<double> _stackDouble;
+    private static MyStack<string> _stackString;
     
     public static void Run()
     {
@@ -54,9 +55,32 @@ public class TypeDataLab
                 case 4:
                     DeleteStack();
                     break;
+                case 5:
+                    PrintStack();
+                    break;
                 default:
                     break;
             }
+        }
+    }
+
+    private static void PrintStack()
+    {
+        if (_stackLong != null)
+        {
+            Console.WriteLine("Pop long: " + _stackLong.Pop());
+        }
+        else if (_stackDouble != null)
+        {
+            Console.WriteLine("Pop double: " + _stackDouble.Pop());
+        }
+        else if (_stackString != null)
+        {
+            Console.WriteLine("Pop string: " + _stackString.Pop());
+        }
+        else
+        {
+            throw new Exception("Stack is not created");
         }
     }
 
@@ -149,13 +173,13 @@ public class TypeDataLab
         switch (a)
         {
             case 1:
-                _stackLong = new Stack<long>();
+                _stackLong = new MyStack<long>();
                 break;
             case 2:
-                _stackDouble = new Stack<double>();
+                _stackDouble = new MyStack<double>();
                 break;
             case 3:
-                _stackString = new Stack<string>();
+                _stackString = new MyStack<string>();
                 break;
             default:
                 break;

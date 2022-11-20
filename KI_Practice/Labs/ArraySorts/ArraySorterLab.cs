@@ -14,7 +14,8 @@ public class ArraySorterLab
 
     private static int[][] _array = null!;
     private static string[][] _arrayKeys = null!;
-    private static readonly int[] ArraySize = { 100_000, 200_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000 };
+    //private static readonly int[] ArraySize = { 100_000, 200_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000 };
+    private static readonly int[] ArraySize = { 20 };
     private static readonly int MaxArrayValue = ArraySize[0];
 
     private static long[]
@@ -26,6 +27,9 @@ public class ArraySorterLab
 
     public static void Run()
     {
+        int[] tempArray = new int[10];
+        // read array data from console read
+        
         // Main program
         bool isActive = true;
         Console.WriteLine("Creating arrays...");
@@ -126,6 +130,7 @@ public class ArraySorterLab
             if (i == 0)
                 _stabledAndCorrected[3] = new bool[2] {false, true};
             
+            Console.WriteLine("Sorted array:" + string.Join(", ", sortedArray));
             Console.WriteLine($"Standard sort for array size {ArraySize[i]} took {_standardTime[i]} ms");
         }
         Console.WriteLine(_stabledAndCorrected[3][0]
@@ -149,6 +154,8 @@ public class ArraySorterLab
 
             if (i == 0)
             {
+                // output sorted array
+                Console.WriteLine("Sorted array:" + string.Join(", ", sortedArray));
                 var correctSortedArray = (int[])_array[i].Clone();
                 var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
                 Array.Sort(correctSortedArray, correctSortedArrayKeys);
@@ -184,6 +191,7 @@ public class ArraySorterLab
             _radixTime[i] = Sw.ElapsedMilliseconds;
             if (i == 0)
             {
+                Console.WriteLine("Sorted array:" + string.Join(", ", sortedArray));
                 var correctSortedArray = (int[])_array[i].Clone();
                 var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
                 Array.Sort(correctSortedArray, correctSortedArrayKeys);
@@ -218,6 +226,7 @@ public class ArraySorterLab
             
             if (i == 0)
             {
+                Console.WriteLine("Sorted array:" + string.Join(", ", sortedArray));
                 var correctSortedArray = (int[])_array[i].Clone();
                 var correctSortedArrayKeys = (string[])_arrayKeys[i].Clone();
                 Array.Sort(correctSortedArray, correctSortedArrayKeys);

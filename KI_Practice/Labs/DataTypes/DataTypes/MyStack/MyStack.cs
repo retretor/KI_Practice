@@ -1,10 +1,10 @@
 ﻿namespace KI_Practice.Labs.DataTypes.DataTypes;
 
-public class Stack<T> : IStack<T>
+public class MyStack<T> : IStack<T>
 {
     private StackNode<T> _top;
 
-    public Stack()
+    public MyStack()
     {
         _top = null;
     }
@@ -30,7 +30,6 @@ public class Stack<T> : IStack<T>
         }
         throw new InvalidOperationException("Stack is empty");
     }
-
 
     public bool CanPush() => true;
 
